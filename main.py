@@ -43,27 +43,38 @@ def rond():
     return x, y
 
 def position_jouee():
-    global coup
+    global coup, tour
     if tour == 1:
         x, y = row, col
     else:
         x, y = row, col
-    coord = (x, y)
+    coord = (x, y, tour)
     if coord not in T:
         T.add(coord)
         coup += 1
         #print(T)
 
 def check_victoire():
-    for ligne in range(0, 3):
-        if (ligne, 0) in T and (ligne, 1) in T and (ligne, 2) in T:
+    for ligne in range(0, 3): # joueur 1
+        if (ligne, 0, 1) in T and (ligne, 1, 1) in T and (ligne, 2, 1) in T:
             return True
     for colonne in range(0, 3):
-        if (0, colonne) in T and (1, colonne) in T and (2, colonne) in T:
+        if (0, colonne, 1) in T and (1, colonne, 1) in T and (2, colonne, 1) in T:
             return True
-    if (0, 0) in T and (1, 1) in T and (2, 2) in T:
+    if (0, 0, 1) in T and (1, 1, 1) in T and (2, 2, 1) in T:
         return True
-    if (0, 2) in T and (1, 1) in T and (2, 0) in T:
+    if (0, 2, 1) in T and (1, 1, 1) in T and (2, 0, 1) in T:
+        return True
+    
+    for ligne in range(0, 3): # joueur 2
+        if (ligne, 0, 0) in T and (ligne, 1, 0) in T and (ligne, 2, 0) in T:
+            return True
+    for colonne in range(0, 3):
+        if (0, colonne, 0) in T and (1, colonne, 0) in T and (2, colonne, 0) in T:
+            return True
+    if (0, 0, 0) in T and (1, 1, 0) in T and (2, 2, 0) in T:
+        return True
+    if (0, 2, 0) in T and (1, 1, 0) in T and (2, 0, 0) in T:
         return True
     return False
 
@@ -86,7 +97,6 @@ while run == True:
                         position_jouee()
                         if check_victoire() == True:
                             print(f"Victoire du joueur 1 ! \nNombre de coup : {coup}")
-                            exit()
                         tour -= 1
                         #print(tour, coup)
                 else:
@@ -95,7 +105,6 @@ while run == True:
                         position_jouee()
                         if check_victoire() == True:
                             print(f"Victoire du joueur 2 ! \nNombre de coup : {coup}")
-                            exit()
                         tour += 1
                         #print(tour, coup)
     
