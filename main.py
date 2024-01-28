@@ -83,6 +83,24 @@ def afficher_message_victoire(joueur):
     message = font.render(f"Victoire du joueur {joueur} !", True, "black")
     screen.blit(message, (10, SCREEN_HEIGHT // 2))
 
+def victoire(joueur):
+    global run
+    print(f"Victoire du joueur 1 ! \nNombre de coup : {coup}")
+    afficher_message_victoire(joueur)
+    pygame.display.update()
+    time.sleep(3)
+    run = False
+
+def egalite():
+    global coup, run
+    if coup == 9 and check_victoire() == False:
+        message_match_nul = font.render(f"Match nul !", True, "black")
+        screen.blit(message_match_nul, (70, SCREEN_HEIGHT // 2))
+        pygame.display.update()
+        time.sleep(3)
+        run = False
+
+
 run = True
 
 draw_background()
@@ -101,12 +119,8 @@ while run == True:
                         croix()
                         position_jouee()
                         if check_victoire() == True:
-                            print(f"Victoire du joueur 1 ! \nNombre de coup : {coup}")
-                            afficher_message_victoire(1)
-                            pygame.display.update()
-                            time.sleep(3)
-                            run = False
-                            
+                            victoire(1)
+                        egalite()
                         tour -= 1
                         #print(tour, coup)
                 else:
@@ -114,11 +128,8 @@ while run == True:
                         rond()
                         position_jouee()
                         if check_victoire() == True:
-                            print(f"Victoire du joueur 2 ! \nNombre de coup : {coup}")
-                            afficher_message_victoire(2)
-                            pygame.display.update()
-                            time.sleep(3)
-                            run = False
+                            victoire(2)
+                        egalite()
                         tour += 1
                         #print(tour, coup)
     
