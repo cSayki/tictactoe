@@ -52,7 +52,7 @@ def position_jouee():
     if coord not in T:
         T.add(coord)
         coup += 1
-        #print(T)
+        print(T)
 
 def check_victoire():
     for ligne in range(0, 3): # joueur 1
@@ -92,7 +92,7 @@ while run == True:
                 col = event.pos[0] // 100 #event.pos[O] c'est pour réccupérer la position x de la souris
                 row = event.pos[1] // 100 #event.pos[1] c'est pour réccupérer la position y de la souris
                 if tour == 1:
-                    if (row, col) not in T:
+                    if (row, col, 1) not in T and (row, col, 0) not in T:
                         croix()
                         position_jouee()
                         if check_victoire() == True:
@@ -100,7 +100,7 @@ while run == True:
                         tour -= 1
                         #print(tour, coup)
                 else:
-                    if (row, col) not in T:
+                    if (row, col, 1) not in T and (row, col, 0) not in T:
                         rond()
                         position_jouee()
                         if check_victoire() == True:
