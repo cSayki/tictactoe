@@ -45,10 +45,7 @@ def rond():
 
 def position_jouee():
     global coup, tour
-    if tour == 1:
-        x, y = row, col
-    else:
-        x, y = row, col
+    x, y = row, col
     coord = (x, y, tour)
     if coord not in T:
         T.add(coord)
