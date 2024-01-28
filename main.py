@@ -1,4 +1,5 @@
 import pygame
+import time
     
 pygame.init()
 
@@ -18,7 +19,7 @@ coup = 0
 tour = 1
 
 # Ajout des polices
-font = pygame.font.SysFont(None, 24)
+font = pygame.font.SysFont(None, 40)
 
 # Position des croix et cercles
 T = set()
@@ -78,6 +79,10 @@ def check_victoire():
         return True
     return False
 
+def afficher_message_victoire(joueur):
+    message = font.render(f"Victoire du joueur {joueur} !", True, "black")
+    screen.blit(message, (10, SCREEN_HEIGHT // 2))
+
 run = True
 
 draw_background()
@@ -97,6 +102,11 @@ while run == True:
                         position_jouee()
                         if check_victoire() == True:
                             print(f"Victoire du joueur 1 ! \nNombre de coup : {coup}")
+                            afficher_message_victoire(1)
+                            pygame.display.update()
+                            time.sleep(3)
+                            run = False
+                            
                         tour -= 1
                         #print(tour, coup)
                 else:
@@ -105,6 +115,10 @@ while run == True:
                         position_jouee()
                         if check_victoire() == True:
                             print(f"Victoire du joueur 2 ! \nNombre de coup : {coup}")
+                            afficher_message_victoire(2)
+                            pygame.display.update()
+                            time.sleep(3)
+                            run = False
                         tour += 1
                         #print(tour, coup)
     
