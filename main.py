@@ -7,7 +7,7 @@ SCREEN_WIDTH = 300
 SCREEN_HEIGHT = 300
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("TicTacTo tu connais")
+pygame.display.set_caption("TicTacToe tu connais")
 
 # Décor du jeu
 line_width = 5
